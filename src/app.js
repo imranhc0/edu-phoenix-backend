@@ -5,6 +5,7 @@ import globalErrorHandler from './middlewares/globalErrorHandler.js'; // Import 
 import router from './routes/index.js'; // Import application routes
 import cookieParser from 'cookie-parser'; // Import cookie parser middleware
 import bodyParser from 'body-parser'; // Import body parser middleware
+import SchedulePostCheck from './corn/SchedulePostCheck.js';
 
 // Create an Express application instance
 const app = express();
@@ -47,6 +48,8 @@ app.use((req, res) => {
     ],
   });
 });
+
+SchedulePostCheck();
 
 // Export the Express application instance
 export default app;
