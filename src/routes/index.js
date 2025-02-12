@@ -3,8 +3,7 @@ import { AuthRoutes } from '../services/auth/auth.route.js';
 import { UserRoutes } from '../services/user/user.route.js';
 import { PostsRoutes } from '../services/posts/posts.route.js';
 import { AiGenerate } from '../services/ai/ai.route.js';
-import { UserRoutes } from '../services/user/user.route.js';
-import { PostsRoutes } from '../services/posts/posts.route.js';
+
 
 const router = express.Router(); // Create a new express router
 
@@ -26,10 +25,6 @@ const moduleRoutes = [
   //     path: '/user',
   //     route: UserRoutes,
   //   },
-  {
-    path: '/user',
-    route: UserRoutes,
-  },
   //   {
   //     path: '/comments',
   //     route: CommentsRoutes,
