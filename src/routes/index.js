@@ -1,5 +1,6 @@
 import express from 'express'; // Import express for routing
 import { AuthRoutes } from '../services/auth/auth.route.js';
+import { AiGenerate } from '../services/ai/ai.route.js';
 
 const router = express.Router(); // Create a new express router
 
@@ -9,6 +10,10 @@ const moduleRoutes = [
     path: '/auth',
     route: AuthRoutes,
   },
+  {
+    path: '/ai',
+    route: AiGenerate,
+  }
   //   {
   //     path: '/user',
   //     route: UserRoutes,

@@ -1,18 +1,25 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import catchAsync from '../../shared/catchAsync';
-import sendResponse from '../../shared/sendResponse';
-
-import { AiServices } from '../services/ai.service';
+import catchAsync from '../../shared/catchAsync.js';
+import sendResponse from '../../shared/sendResponse.js';
+import { AiServices } from './ai.service.js';
 
 const generateDescription = catchAsync(async (req, res) => {
     const { imageURL } = req.body;
-    const result = await AiServices.generateDescription(imageURL);
-  sendResponse(res, {
-    statusCode: 200,
-    success: true,
-    message: 'User logged in succesfully',
-    data: result,
-  });
+    let result = await AiServices.generateDescription(imageURL);
+    try {
+        result = result.choices[0].message.content
+        result = JSON.parse(result.replace(/\\n/g, '').replace(/\\/g, ''));
+    }catch (error) {
+        console.log(error);
+    } finally {
+        sendResponse(res, {
+          statusCode: 200,
+          success: true,
+          message: 'User logged in succesfully',
+          data: result,
+        });
+    }
+
 });
 
 
