@@ -58,7 +58,7 @@ userSchema.pre('save', async function (next) {
 userSchema.statics.isUserExist = async function (value, field) {
   return await User.findOne(
     { [field]: value },
-    { _id: 1, password: 1, role: 1, contactNo: 1 },
+    { _id: 1, password: 1, role: 1, phone: 1 },
   );
 };
 

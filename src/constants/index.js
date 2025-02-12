@@ -4,3 +4,4 @@ export const USER_ROLES = {
   ADMIN: 'admin',
   UNVERIFIED: 'unverified',
 };
+export const postSearchableFields = ['title', 'description'];

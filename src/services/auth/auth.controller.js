@@ -3,6 +3,7 @@ import catchAsync from '../../shared/catchAsync.js';
 import sendResponse from '../../shared/sendResponse.js';
 import config from '../../config/index.js';
 import { AuthServices } from './auth.service.js';
+import { jwtHelpers } from '../../helpers/jwtHelpers.js';
 
 const loginUser = catchAsync(async (req, res) => {
   const { ...loginData } = req.body;
@@ -32,8 +33,8 @@ const signupUser = catchAsync(async (req, res) => {
   });
 });
 const forgetPassword = catchAsync(async (req, res) => {
-  const result = await AuthServices.forgetPassword(req.body);
-
+  const user = jwtHelpers.verifyToken(req.body.accessToken, config.jwt.secret);
+  const result = await AuthServices.forgetPassword(req.body, user.userId);
   sendResponse(res, {
     statusCode: 200,
     success: true,
@@ -42,7 +43,8 @@ const forgetPassword = catchAsync(async (req, res) => {
   });
 });
 const getAccessToken = catchAsync(async (req, res) => {
-  const result = await AuthServices.getAccessTokenFromDB(req.body);
+  const { userId } = req.user;
+  const result = await AuthServices.getAccessTokenFromDB(req.body, userId);
 
   sendResponse(res, {
     statusCode: 200,
