@@ -44,8 +44,8 @@ const getMyProfile = catchAsync(async (req, res) => {
   });
 });
 const banUser = catchAsync(async (req, res) => {
-  const { userId } = req.user;
-  const result = await UserServices.banUserInDB(userId);
+  const { id } = req.params;
+  const result = await UserServices.banUserInDB(id);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
