@@ -1,7 +1,7 @@
 import express from 'express';
-import validateRequest from '../middlewares/validateRequest';
-import { AuthValidation } from '../validations/auth.validation';
-import { AuthController } from '../controllers/auth.controller';
+import validateRequest from '../../middlewares/validateRequest.js';
+import { AuthValidation } from './auth.validation.js';
+import { AuthController } from './auth.controller.js';
 
 const router = express.Router();
 router
@@ -22,7 +22,7 @@ router
   )
   .post(
     '/accessToken',
-    validateRequest(AuthValidation.accessTokenSchema),
+    validateRequest(AuthValidation.accessTokenZodSchema),
     AuthController.getAccessToken,
   )
   .post(
@@ -36,4 +36,4 @@ router
     AuthController.generateOTP,
   );
 
-export const AuthRoute = router;
+export const AuthRoutes = router;

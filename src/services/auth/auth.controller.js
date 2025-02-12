@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import catchAsync from '../../shared/catchAsync';
-import sendResponse from '../../shared/sendResponse';
-
-import { AuthServices } from '../services/auth.service';
+import catchAsync from '../../shared/catchAsync.js';
+import sendResponse from '../../shared/sendResponse.js';
+import config from '../../config/index.js';
+import { AuthServices } from './auth.service.js';
 
 const loginUser = catchAsync(async (req, res) => {
   const { ...loginData } = req.body;
@@ -62,13 +62,13 @@ const generateOTP = catchAsync(async (req, res) => {
   });
 });
 const verfiyOTP = catchAsync(async (req, res) => {
-  const result = await AuthServices.verfiyOTP(req.body);
+  const result = await AuthServices.verfiyOTP(req.body.otp, req.body.email);
 
   sendResponse(res, {
     statusCode: 200,
     success: true,
     message: 'OTP verified succesfully',
-    data: null,
+    data: result,
   });
 });
 
@@ -78,4 +78,5 @@ export const AuthController = {
   forgetPassword,
   getAccessToken,
   verfiyOTP,
+  generateOTP,
 };
