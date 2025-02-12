@@ -81,48 +81,6 @@ const analyzeSentiment = async(texts)=> {
   });
 }
 
-// async function main() {
-//     const chatCompletion = await client.chat.completions.create({
-//       messages: [
-//         {
-//           role: 'system',
-//           content: `You are an AI assistant that helps users to generate descriptions from image and you have to generate description in bengali and english language both in two json key. Your answer should be 1 paragraph long. You should describe the image in a way that is helpful for a police report.`,
-//         },
-//         {
-//           role: 'user',
-//           content: [
-//             {
-//               type: 'text',
-//               text: 'You will seen an image or multiple image and you have to describe the image, there is a high chance that the image will be a picture of a crime scene. Some one will report that crime using your description. So, you have to be very careful about the description.',
-//             },
-//             {
-//               type: 'image_url',
-//               image_url: {
-//                 url: 'https://static01.nyt.com/images/2024/07/16/multimedia/16bangladesh-1-ljhq/16bangladesh-1-ljhq-facebookJumbo.jpg',
-//               },
-//             },
-//             {
-//               type: 'image_url',
-//               image_url: {
-//                 url: 'https://static01.nyt.com/images/2024/07/16/multimedia/16bangladesh-1-ljhq/16bangladesh-1-ljhq-facebookJumbo.jpg',
-//               },
-//             },
-//           ],
-//         },
-//       ],
-//       model: 'gpt-4o-mini',
-//       max_tokens: 400,
-//       temperature: 0.7,
-//     });
-  
-//     console.log(chatCompletion.choices[0].message.content);
-//   }
-// const sentiment = await analyzeSentiment(['ছবিতে একটি বিশৃঙ্খল পরিস্থিতি দেখা যাচ্ছে যেখানে বেশ কিছু তরুণ ব্যক্তি দৌড়ে যাচ্ছে। পেছনে দেখা যাচ্ছে একটি বড় কাঠের পাত্র যা রাস্তার মাঝখানে ফেলে রাখা হয়েছে। চারপাশে মাটিতে ছড়িয়ে পড়া ইট, পাথর এবং অন্যান্য ধ্বংসাবশেষ রয়েছে, যা সংঘর্ষের চিহ্ন নির্দেশ করছে। কিছু তরুণের হাতে দা বা লাঠির মত অস্ত্র আছে এবং তারা আতঙ্কিত মনে দৌড়ে যাচ্ছে। পরিস্থিতি অস্থিতিশীল এবং ভয়ের আবহ তৈরি করেছে, যা সংঘর্ষের একটি ক্রমবর্ধমান দৃশ্যের ইঙ্গিত দেয়।']);
-// console.log(sentiment.choices[0].message.content);
-// // console.log()
-// // main();
-
-
 export const AiServices = {
     generateDescription,
     analyzeSentiment,
