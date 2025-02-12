@@ -30,7 +30,7 @@ router
     validateRequest(AuthValidation.verifyOTPSchema),
     AuthController.verfiyOTP,
   )
-  .patch(
+  .post(
     '/generate-otp',
     validateRequest(AuthValidation.generateOTPZodSchema),
     AuthController.generateOTP,

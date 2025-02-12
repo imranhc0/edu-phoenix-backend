@@ -83,7 +83,7 @@ const generateOTP = async payload => {
 };
 const verfiyOTP = async (otp, email) => {
   const user = await User.findOne({ email: email });
-  console.log(user);
+
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User does not exist');
   }
@@ -93,9 +93,16 @@ const verfiyOTP = async (otp, email) => {
     user.isVerified = true;
     user.oneTimePassword = null;
     user.save();
-    return true;
+    const newAccessToken = jwtHelpers.createToken(
+      {
+        _id: user._id,
+      },
+      config.jwt.secret,
+      config.jwt.expires_in,
+    );
+    return { accessToken: newAccessToken };
   }
-  return false;
+  throw new ApiError(httpStatus.UNAUTHORIZED, "OTP didn't matched");
 };
 
 export const AuthServices = {
