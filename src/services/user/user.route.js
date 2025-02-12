@@ -23,6 +23,6 @@ router
     auth(USER_ROLES.ADMIN, USER_ROLES.UNVERIFIED, USER_ROLES.USER),
     UserController.getOneUser,
   )
-  .patch('/', auth(USER_ROLES.ADMIN));
+  .patch('/ban/:id', UserController.banUser);
 
 export const UserRoutes = router;
