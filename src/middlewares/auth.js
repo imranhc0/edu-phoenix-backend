@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
-import ApiError from '../../errors/ApiError.js';
+import ApiError from '../errors/ApiError.js';
 import httpStatus from 'http-status';
-import { jwtHelpers } from '../../helpers/jwtHelpers.js';
-import config from '../../config/index.js';
+import { jwtHelpers } from '../helpers/jwtHelpers.js';
+import config from '../config/index.js';
 
 const auth =
   (...requiredRoles) =>
@@ -15,7 +15,6 @@ const auth =
       let verifiedUser = null;
 
       verifiedUser = jwtHelpers.verifyToken(token, config.jwt.secret);
-      req.user = verifiedUser;
 
       if (requiredRoles.length && !requiredRoles.includes(verifiedUser.role)) {
         throw new ApiError(httpStatus.FORBIDDEN, 'Forbidden');

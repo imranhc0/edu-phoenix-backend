@@ -7,7 +7,9 @@ import User from '../user/user.model.js';
 import { USER_ROLES } from '../../constants/index.js';
 const loginUser = async loginData => {
   const { email, password } = loginData;
+
   const isUserExist = await User.isUserExist(email, 'email');
+
   if (!isUserExist)
     throw new ApiError(httpStatus.NOT_FOUND, 'Failed to find user');
   if (
@@ -42,9 +44,12 @@ const signupUser = async payload => {
   return createdUser;
 };
 const forgetPassword = async (payload, userId) => {
-  const response = await User.findOneAndUpdate({ _id: userId }, payload);
+  const response = await User.findOne({ _id: userId });
+
   if (!response)
     throw new ApiError(httpStatus.NOT_FOUND, 'Failed to find the user');
+  response.password = payload.password;
+  response.save();
 };
 const getAccessTokenFromDB = async token => {
   let verifyToken = null;
@@ -91,6 +96,7 @@ const verfiyOTP = async (otp, email) => {
     throw new ApiError(httpStatus.NOT_IMPLEMENTED, "OTP didn't generate");
   if (user.oneTimePassword === otp) {
     user.isVerified = true;
+    user.role = USER_ROLES.USER;
     user.oneTimePassword = null;
     user.save();
     const newAccessToken = jwtHelpers.createToken(

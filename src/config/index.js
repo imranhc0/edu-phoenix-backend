@@ -13,3 +13,4 @@ export default {
     refresh_expires_in: process.env.JWT_REFRESH_EXPIRES_IN,
   },
 };
+export const paginationFields = ['page', 'limit', 'sortBy', 'sortOrder'];
